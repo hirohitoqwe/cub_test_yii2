@@ -15,7 +15,8 @@ class m230717_122147_create_users_table extends Migration
         $this->createTable('{{%users}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string(60),
-            'password' => $this->string(50),
+            'auth_key' => $this->string(32)->notNull(),
+            'password' => $this->string(),
             'role'=>$this->integer()
         ]);
         $this->addForeignKey('fk-role_id-user_role','{{%users}}','role','{{%roles}}','role_id');

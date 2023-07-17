@@ -17,10 +17,10 @@ class m230717_121738_create_roles_table extends Migration
             'role_name' => $this->string(50)
         ]);
         $this->insert('{{%roles}}', [
-            'role_name' => 'Админ'
+            'role_name' => 'Пользователь'
         ]);
         $this->insert('{{%roles}}', [
-            'role_name' => 'Пользователь'
+            'role_name' => 'Админ'
         ]);
     }
 
