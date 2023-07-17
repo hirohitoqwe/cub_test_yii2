@@ -14,7 +14,7 @@ class m230717_122147_create_users_table extends Migration
     {
         $this->createTable('{{%users}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(60),
+            'username' => $this->string(60),
             'password' => $this->string(50),
             'role'=>$this->integer()
         ]);
