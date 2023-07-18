@@ -101,17 +101,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
-    public function actionBooks()
-    {
-        $books = Book::find()->orderBy("id")->all();
-    }
-
-    public function actionNews()
-    {
-
-    }
-
+    
     /**
      * Logout action.
      *
