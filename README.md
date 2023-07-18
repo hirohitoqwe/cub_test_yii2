@@ -1,4 +1,4 @@
-# Тестовое задание от компании КУБ24
+# Тестовое задание от компании КУБ
 
 ## Задание 1.
 ```
@@ -43,6 +43,19 @@ SELECT title, COUNT(full_name) AS authors_count, GROUP_CONCAT(full_name, ",") AS
 FROM book INNER JOIN book_to_author ON book.id = book_to_author.book_id 
 INNER JOIN author ON author.id = book_to_author.author_id
 GROUP BY title ORDER BY authors_count ASC;
+~~~~
+
+~~~~sql
+WITH authors AS (
+    SELECT book_id, full_name FROM book_to_author
+    JOIN author ON (book_to_author.author_id = author.id)
+)
+SELECT title,
+       (SELECT count(*) FROM authors WHERE book_id=book.id ) as authors_count,
+       (SELECT group_concat(full_name, ', ') FROM authors
+        WHERE book_id = book.id) as authors_name
+FROM book
+GROUP BY book.id;
 ~~~~
 
 ## Задание 3.
