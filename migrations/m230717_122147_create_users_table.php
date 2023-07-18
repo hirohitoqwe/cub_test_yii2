@@ -17,9 +17,7 @@ class m230717_122147_create_users_table extends Migration
             'username' => $this->string(60),
             'auth_key' => $this->string(32)->notNull(),
             'password' => $this->string(),
-            'role'=>$this->integer()
         ]);
-        $this->addForeignKey('fk-role_id-user_role','{{%users}}','role','{{%roles}}','role_id');
     }
 
     /**
@@ -27,7 +25,6 @@ class m230717_122147_create_users_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-role_id-user_role','{{%users}}');
         $this->dropTable('{{%users}}');
     }
 }

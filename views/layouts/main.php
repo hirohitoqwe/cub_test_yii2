@@ -45,6 +45,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ? ['label' => 'Books', 'url' => ['/book']] : '<li class="nav-item">',
             !Yii::$app->user->isGuest
                 ? ['label' => 'News', 'url' => ['/news']] : '<li class="nav-item">',
+            Yii::$app->authManager->checkAccess(Yii::$app->user->id, 'admin')
+                ? ['label' => 'Users', 'url' => ['/admin']] : '<li class="nav-item">',
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
@@ -55,6 +57,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 )
                 . Html::endForm()
                 . '</li>',
+            Yii::$app->user->isGuest
+                ? ['label' => 'Signup', 'url' => ['/site/signup']] :
+                '<li class="nav-item">',
         ]
     ]);
     NavBar::end();

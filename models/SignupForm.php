@@ -34,8 +34,16 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->setPassword($this->password);
-        $user->role = 1;
         $user->generateAuthKey();
-        return $user->save() ? $user : null;
+        $user->save(false);
+        $auth = \Yii::$app->authManager;
+        $authRole = $auth->getRole('user');
+        $auth->assign($authRole, $user->getId());
+        /*  Если пользователь будет администратором
+         *  $auth = \Yii::$app->authManager;
+         *  $authRole = $auth->getRole('admin');
+         *  $auth->assign($authRole, $user->getId());
+         */
+        return  $user;
     }
 }
