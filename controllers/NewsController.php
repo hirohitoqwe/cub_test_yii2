@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Book;
+use app\models\CreateForm;
 use app\models\News;
 use app\models\SignupForm;
 use Yii;
@@ -18,7 +19,8 @@ class NewsController extends Controller
     public function actionIndex()
     {
         $news = News::find()->orderBy("id")->all();
-        return $this->render('index', ['newss' => $news]);
+        $model = new CreateForm();
+        return $this->render('index', ['newss' => $news, 'model' => $model]);
     }
 
 }
