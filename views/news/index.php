@@ -1,18 +1,23 @@
 <?php
+
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
+
 ?>
 
-<div class="news-index">
-    <?php foreach ($newss as $news): ?>
-        <div>
-            <h3><?= $news->news_headline ?></h3>
-            <div class="text-bg-info">
-                <?= $news->news_text ?>
+    <div class="news-index">
+        <?php foreach ($newss as $news): ?>
+            <div>
+                <h3><?= $news->news_headline ?></h3>
+                <div class="text-bg-info">
+                    <?= $news->news_text ?>
+                </div>
+                <?php if (Yii::$app->authManager->checkAccess(Yii::$app->user->id, 'admin')): ?>
+                    <a class="button" href=<?= \yii\helpers\Url::to(['/admin/edit/', 'id' => $news->id]) ?>>Редактировать</a>
+                <?php endif; ?>
             </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+        <?php endforeach; ?>
+    </div>
 <?php
 if (Yii::$app->authManager->checkAccess(Yii::$app->user->id, 'admin')) {
     ?>

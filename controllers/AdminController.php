@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Book;
+use app\models\EditForm;
 use app\models\News;
 use app\models\SignupForm;
 use app\models\User;
@@ -39,6 +40,25 @@ class AdminController extends Controller
             $news->news_headline = $data["news_headline"];
             $news->news_text = $data["news_text"];
             $news->save();
+            return $this->redirect('/news');
+        }
+    }
+
+    public function actionEdit($id)
+    {
+        $model = new EditForm();
+        $news = News::findOne($id);
+        return $this->render('edit', ['model' => $model, 'oldNews' => $news]);
+    }
+
+    public function actionUpdate($id)
+    {
+        if (Yii::$app->request->post()) {
+            $data = Yii::$app->request->post()["EditForm"];
+            $oldNews = News::findOne($id);
+            $oldNews->news_headline = $data['news_headline'];
+            $oldNews->news_text = $data['news_text'];
+            $oldNews->save();
             return $this->redirect('/news');
         }
     }
